@@ -1,6 +1,6 @@
 <template>
     <img class="logo"
-         src="rnglogo-white.png"
+         src="/rnglogo-white.png"
          alt="Het logo van Recovering Nice Guys">
 </template>
 

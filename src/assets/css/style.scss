@@ -1,0 +1,52 @@
+@use "sass:meta";
+:root {
+    --rng-grey-50: #fafafa;
+    --rng-grey-500: #9e9e9e;
+    --rng-grey-700: #616161;
+    --rng-black: #212121;
+    --rng-red: #ee0202;
+    --rng-red-50: #ffebee;
+    --bg-color: var(--rng-black);
+}
+
+* {
+    font-weight: 300;
+}
+
+html {
+    background-color: var(--bg-color);
+    color: white;
+    font-family: "Outfit", sans-serif;
+    font-size: 16px;
+}
+
+body {
+    padding: 2rem;
+}
+
+#app {
+    display: grid;
+    gap: 2rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: bold;
+    margin: 0;
+}
+
+p {
+    margin-block: 0;
+}
+
+ul {
+    list-style-type: none;
+    padding-inline-start: 0;
+    margin-block: 0;
+}
+
+@include meta.load-css("src/assets/css/utilities");

@@ -16,7 +16,7 @@
   const meditation = ref<{ date: Date, person: string }[]>([]);
 
   async function getBoards() {
-    lists.value = await window.Trello.get(`boards/${import.meta.env.VITE_TRELLO_BOARD_ID}/lists`);
+    lists.value = await window.Trello.get(`boards/${process.env.TRELLO_BOARD_ID}/lists`);
 
     const listId = lists.value.find((l: any) => l.name.includes('Meetings'))?.id;
 
@@ -28,7 +28,7 @@
       meetingCards.value.splice(comingUpCard, 1);
     }
 
-    const _tempMeditation = await window.Trello.get(`cards/${import.meta.env.VITE_MEDITATION_CARD_ID}`)
+    const _tempMeditation = await window.Trello.get(`cards/${process.env.MEDITATION_CARD_ID}`)
 
     let year: number;
     if (_tempMeditation) {

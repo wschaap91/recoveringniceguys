@@ -10,7 +10,7 @@
         const boards = await window.Trello.get('/members/me/boards');
         console.log(boards);
         const rngboard = boards.find((b: any) =>
-            b.id === import.meta.env.VITE_TRELLO_BOARD_ID
+            b.id === process.env.TRELLO_BOARD_ID
         )
 
         if (rngboard) {

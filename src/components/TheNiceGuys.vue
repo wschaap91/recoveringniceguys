@@ -5,7 +5,6 @@
 <template>
     <ul>
         <li>
-            Jan
         </li>
     </ul>
 </template>

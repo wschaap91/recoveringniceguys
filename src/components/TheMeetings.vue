@@ -1,20 +1,31 @@
 <script setup lang="ts">
-    import { ref } from 'vue';
+    import { computed } from 'vue';
+    import { areDatesOnSameDayOfYear } from '@/utilities/dates'
     import WidgetCard from './WidgetCard.vue';
 
-    const meetings = ref([
-        {
-            date: 20,
-            title: 'Truth speaking',
-            meditation: 'Wouter S'
-        },
-        {
-            date: 27,
-            title: 'Celebrations',
-            meditation: 'Wouter E'
-        },
+    const props = defineProps<{ cards: Record<string, any>[], meditation: { date: Date, person: string }[] }>()
 
-    ])
+    function getMeetingName(val: string) {
+        return val.split(': ')[1];
+    }
+
+    const meetings = computed(() => {
+        return props.cards.map((c: any) => {
+            const meetingDate = new Date(c.badges.due);
+
+            const meditation = props.meditation.find((m: any) => {
+                console.log(m.date, meetingDate)
+                return areDatesOnSameDayOfYear(m.date, meetingDate);
+            })
+
+            return {
+                date: new Date(c.badges.due).getDate(),
+                title: getMeetingName(c.name),
+                meditation: meditation?.person
+            }
+
+        })
+    })
 </script>
 
 <template>
@@ -28,7 +39,8 @@
                 </span>
                 <div>
                     <p>{{ title }}</p>
-                    <span class="u-subtext u-text-small">Meditatie: {{ meditation }}</span>
+                    <span v-if="meditation"
+                          class="u-subtext u-text-small">Meditatie: {{ meditation }}</span>
                 </div>
             </li>
         </ul>
@@ -56,5 +68,9 @@
         border-bottom-right-radius: 100px;
         font-weight: bold;
     }
+}
+
+ul {
+    gap: 0.25rem;
 }
 </style>

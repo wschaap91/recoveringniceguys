@@ -7,7 +7,7 @@
   const { token } = storeToRefs(store);
 
   watch(token, () => {
-    if (token.value) return;
+    if (token.value && token.value !== 'undefined') return;
     router.push({ name: 'login' });
   })
 </script>
